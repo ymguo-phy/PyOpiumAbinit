@@ -1,0 +1,58 @@
+
+#Optimization of the lattice parameters https://docs.abinit.org/variables
+optcell 3 # full optimization of cell geometry (modify acell and rprim -
+# normalize the vectors of rprim to generate the acell).
+ionmov 3 # Choice of algorithm to control the displacements of ions,
+# and possibly changes of cell shape and size (see optcell).
+ntime 100 #Gives the maximum number of molecular dynamics time steps or
+#structural optimization steps to be done if ionmov is non-zero.
+dilatmx 1.05 #dilatmx is an auxiliary variable used to book additional memory
+#dilatmx is 1.05. When you have no idea of evolution of the
+
+
+ecutsm 0.5 #The recommended value is 0.5 Ha.Energy cutoff smearing
+tolmxf. 1.0d-6 #maximal absolute force tolerance (in hartree/Bohr) below
+
+# Crystalline calcium FCC
+
+
+#Definition of the unit cell
+acell 5.524 5.524 5.524 Angstroms
+rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)
+       0.5  0.0  0.5   
+       0.5  0.5  0.0
+
+ntypat 1          
+znucl 20         
+natom 1               # There is only one atom per cell
+typat 1                # This atom is of type 1
+xred 0.0  0.0  0.0    # This keyword indicate that the location of the atoms
+
+
+ecut  25         # Maximal kinetic energy cut-off, in Hartree
+nstep 100          # Maximal number of SCF cycles
+toldfe 1.0d-6     # Will stop when, twice in a row, the difference 
+                  # between two consecutive evaluations of total energy 
+                  # differ by less than toldfe (in Hartree) 
+
+#Definition of the k-point grids
+kptopt 1          # Option for the automatic generation of k points, taking
+                  # into account the symmetry
+nshiftk 4
+shiftk  0.5 0.5 0.5  # These shifts will be the same for all grids
+        0.5 0.0 0.0
+        0.0 0.5 0.0
+        0.0 0.0 0.5
+ngkpt  4 4 4 
+
+
+ixc 11
+
+#Definition of occupation numbers
+occopt 3
+tsmear 0.05 eV
+
+
+##Input pseudopotential files
+pp_dirpath "{abinit_psp_dir}" #The path of pseudopotential files
+pseudos "{OPIUM_param_file_name}.fhi" #The name of pseudopotential files for Ca
