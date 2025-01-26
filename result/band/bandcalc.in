@@ -1,0 +1,75 @@
+acell 10.438847158060293 10.438847158060293 10.438847158060293 
+rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)
+       0.5  0.0  0.5   
+       0.5  0.5  0.0
+
+ntypat 1          
+znucl 20         
+
+natom 1               # There is only one atom per cell
+typat 1                # This atom is of type 1
+xred 0.0  0.0  0.0    # This keyword indicate that the location of the atoms
+
+
+ecut  25         # Maximal kinetic energy cut-off, in Hartree
+prtgsr 1 #produce a GSR file include band structure,
+#forces, stresses, electronic density
+nstep 200          # Maximal number of SCF cycles
+#diemac #metal
+ndtset 3 #Gives the number of data sets to be treated.
+###1 SCF
+kptopt1 1          # Option for the automatic generation of k points, taking
+                  # into account the symmetry
+nshiftk1 4
+shiftk1  0.5 0.5 0.5  # These shifts will be the same for all grids
+        0.5 0.0 0.0
+        0.0 0.5 0.0
+        0.0 0.0 0.5
+ngkpt1  6 6 6 
+prtden1 1
+toldfe1 1.0d-6
+
+
+###2 band GXWKGLUWLK
+iscf2 -2 #Controls the self-consistency algorithm.-2 for band
+getden2 -1 # get charge density from previous dataset;-:previous
+
+kptopt2 -9
+
+nband2 20
+ndivk2 68 33 17 87 82 33 18 33 29
+kptbounds2
+0.0 0.0 0.0
+0.5 0.0 0.5
+0.5 0.25 0.75
+0.375 0.375 0.75
+0.0 0.0 0.0
+0.5 0.5 0.5
+0.675 0.25 0.674
+0.5 0.25 0.75
+0.5 0.5 0.5
+0.375 0.375 0.75
+
+
+enunit2 1 # use eV as energy unit
+tolwfr2 1.0d-10
+
+###3 band UX Part
+iscf3 -2 #Controls the self-consistency algorithm.-2 for band
+getden3 -1 # get charge density from previous dataset;-:previous
+
+kptopt3 -1
+
+nband3 20
+ndivk3 20
+kptbounds3
+0.675 0.25 0.674
+0.5 0.0 0.5
+
+
+enunit3 1 # use eV as energy unit
+tolwfr3 1.0d-10
+
+##Input pseudopotential files
+pp_dirpath "/mnt/e/WSL/compmatphy/workdir/abinit-psp/" #The path of pseudopotential files
+pseudos "Ca.fhi" #The name of pseudopotential files for Ca
